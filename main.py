@@ -72,3 +72,6 @@ def stock_analysis_google(query: str):
 @app.get("/")
 def root():
     return {"message": "Actinovate Backend is Live ✅"}
+@app.get("/")
+def root():
+    return {"message": "Actinovate Backend is Live ✅"}
