@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI, HTTPException
 import requests
 import pandas as pd
@@ -8,6 +9,7 @@ from config import (
 )
 
 app = FastAPI()
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
@@ -18,12 +20,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @lru_cache(maxsize=10)
 def get_stock_data_alpha(symbol: str):
-    """Fetch stock data from Alpha Vantage."""
-    url = f"{ALPHA_VANTAGE_BASE_URL}?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHA_VANTAGE_API_KEY}"
-    return fetch_stock_data(url)
+    """
+    Get intraday stock data (5-minute interval) from Alpha Vantage.
+    This endpoint works on the FREE tier.
+    """
+    url = f"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=5min&apikey={ALPHA_VANTAGE_API_KEY}"
+    response = requests.get(url)
+    data = response.json()
+
+    # Optional: Clean the data for frontend
+    if "Time Series (5min)" in data:
+        latest_time = sorted(data["Time Series (5min)"].keys())[-1]
+        return {
+            "symbol": symbol,
+            "latest": data["Time Series (5min)"][latest_time],
+            "timestamp": latest_time
+        }
+    else:
+        return {"error": "No data found or request limit exceeded", "raw": data}
 
 @lru_cache(maxsize=10)
 def get_stock_data_google(query: str):
@@ -52,3 +68,7 @@ def stock_analysis_alpha(symbol: str):
 @app.get("/stock/{query}/google")
 def stock_analysis_google(query: str):
     return get_stock_data_google(query)
+
+@app.get("/")
+def root():
+    return {"message": "Actinovate Backend is Live ✅"}
