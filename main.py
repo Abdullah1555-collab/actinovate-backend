@@ -30,7 +30,6 @@ def get_stock_data_alpha(symbol: str):
     response = requests.get(url)
     data = response.json()
 
-    # Optional: Clean the data for frontend
     if "Time Series (5min)" in data:
         latest_time = sorted(data["Time Series (5min)"].keys())[-1]
         return {
@@ -69,9 +68,6 @@ def stock_analysis_alpha(symbol: str):
 def stock_analysis_google(query: str):
     return get_stock_data_google(query)
 
-@app.get("/")
-def root():
-    return {"message": "Actinovate Backend is Live ✅"}
 @app.get("/")
 def root():
     return {"message": "Actinovate Backend is Live ✅"}
