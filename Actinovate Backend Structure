@@ -3,33 +3,33 @@ actinovate-backend/
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
+├── pyproject.toml
 ├── main.py
 ├── app/
 │   ├── __init__.py
+│   ├── api/
+│   │   ├── v1/
+│   │   │   ├── __init__.py
+│   │   │   ├── endpoints/
+│   │   │   │   ├── stocks.py
+│   │   │   │   ├── portfolio.py
+│   │   │   │   └── auth.py
+│   │   │   └── api.py
 │   ├── core/
 │   │   ├── config.py
 │   │   ├── security.py
 │   │   └── exceptions.py
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── api_v1/
-│   │   │   ├── __init__.py
-│   │   │   ├── endpoints/
-│   │   │   │   ├── stocks.py
-│   │   │   │   └── portfolio.py
-│   │   │   └── routers.py
 │   ├── models/
-│   │   ├── __init__.py
 │   │   ├── schemas.py
 │   │   └── responses.py
 │   ├── services/
-│   │   ├── __init__.py
-│   │   ├── alpha_vantage.py
-│   │   └── google_finance.py
+│   │   ├── stock_service.py
+│   │   ├── portfolio_service.py
+│   │   └── auth_service.py
 │   └── utils/
-│       ├── __init__.py
 │       ├── cache.py
-│       └── logger.py
+│       ├── logger.py
+│       └── helpers.py
 └── tests/
     ├── __init__.py
     ├── test_api.py
