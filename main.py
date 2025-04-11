@@ -1,28 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.api import api_router
+from app.api.v1.endpoints import stocks
 from app.core.config import settings
-from app.core.exceptions import setup_exception_handlers
-from app.utils.logger import configure_logging
+from app.utils.logger import setup_logging
 
-app = FastAPI(
-    title="Actinovate API",
-    description="Backend for Actinovate Portfolio Tracker",
-    version="1.0.0"
-)
+app = FastAPI(title="Actinovate API", version="1.0.0")
 
-# Setup CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.BACKEND_CORS_ORIGINS,
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-configure_logging()
-setup_exception_handlers(app)
-app.include_router(api_router, prefix=settings.API_V1_STR)
+# Setup
+setup_logging()
+app.include_router(stocks.router, prefix="/api/v1/stocks")
 
 if __name__ == "__main__":
     import uvicorn
