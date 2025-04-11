@@ -1,10 +1,9 @@
 from pydantic import BaseModel
+from typing import Optional, Dict, Any
 
-class StandardResponse(BaseModel):
+class StockResponse(BaseModel):
     success: bool
-    data: dict | None = None
-    error: str | None = None
-
-class StockResponse(StandardResponse):
     symbol: str
-    timeframe: str
+    data: Dict[str, Any]
+    error: Optional[str] = None
+    message: Optional[str] = None
