@@ -1,0 +1,35 @@
+actinovate-backend/
+├── .env
+├── .gitignore
+├── requirements.txt
+├── main.py
+├── app/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── exceptions.py
+│   │   └── security.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── v1/
+│   │       ├── __init__.py
+│   │       ├── api.py
+│   │       └── endpoints/
+│   │           ├── __init__.py
+│   │           ├── stocks.py
+│   │           └── portfolio.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── schemas.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── stock_service.py
+│   │   └── portfolio_service.py
+│   └── utils/
+│       ├── __init__.py
+│       ├── logger.py
+│       └── cache.py
+└── tests/
+    ├── __init__.py
+    └── test_api.pyFile Structure
