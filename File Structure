@@ -14,22 +14,15 @@ actinovate-backend/
 │   │   ├── __init__.py
 │   │   └── v1/
 │   │       ├── __init__.py
-│   │       ├── api.py
 │   │       └── endpoints/
 │   │           ├── __init__.py
-│   │           ├── stocks.py
-│   │           └── portfolio.py
+│   │           └── stocks.py
 │   ├── models/
 │   │   ├── __init__.py
-│   │   └── schemas.py
-│   ├── services/
-│   │   ├── __init__.py
-│   │   ├── stock_service.py
-│   │   └── portfolio_service.py
+│   │   └── responses.py
 │   └── utils/
 │       ├── __init__.py
-│       ├── logger.py
-│       └── cache.py
+│       └── logger.py
 └── tests/
     ├── __init__.py
-    └── test_api.pyFile Structure
+    └── test_stocks.py
